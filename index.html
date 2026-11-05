@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Conheça o DATASUS e entenda como os dados de saúde apoiam o planejamento, a transparência e o fortalecimento do SUS.">
-  <meta name="theme-color" content="#14213d">
+  <meta name="theme-color" content="#4169b2">
   <title>DATASUS: informação que fortalece o SUS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
       --accent: #0f7375;
       --hot: #b7351c;
       --line: #d8d1c0;
-      --band: #14213d;
+      --band: #4169b2;
       --band-text: #f6f3ec;
       --highlight: #ffc857;
       --focus: #1463cc;
@@ -36,7 +36,7 @@
         --accent: #62d4d5;
         --hot: #ff8a70;
         --line: #2a3550;
-        --band: #0a101c;
+        --band: #4169b2;
         --band-text: #eef1f6;
         --focus: #8dbaff;
       }
@@ -49,7 +49,7 @@
       --accent: #62d4d5;
       --hot: #ff8a70;
       --line: #2a3550;
-      --band: #0a101c;
+      --band: #4169b2;
       --band-text: #eef1f6;
       --focus: #8dbaff;
     }
@@ -63,11 +63,10 @@
     .skip-link:focus { top: 1rem; }
     .hero { padding: 2.8rem 1.5rem 3.4rem; background: var(--band); color: var(--band-text); }
     .hero-inner { max-width: 1040px; margin: 0 auto; }
-    .brand { display: inline-flex; align-items: center; gap: .65rem; margin-bottom: 2rem; color: var(--band-text); font: 500 .9rem 'JetBrains Mono', monospace; letter-spacing: .04em; }
-    .brand-mark { display: grid; width: 2.6rem; height: 2.6rem; place-items: center; border: 2px solid var(--highlight); border-radius: 50%; color: var(--highlight); font-weight: 700; }
+    .datasus-logo { display: block; width: min(100%, 520px); height: auto; margin: 0 0 2rem; }
     .hero h1 { max-width: 820px; font-size: clamp(2.4rem, 7vw, 4.6rem); }
     .hero h1 em { color: var(--highlight); font-style: normal; }
-    .hero p { max-width: 600px; margin: 1.1rem 0 1.7rem; color: #d3d9e5; font-size: 1.1rem; }
+    .hero p { max-width: 600px; margin: 1.1rem 0 1.7rem; color: #fff; font-size: 1.1rem; }
     .button { display: inline-block; padding: .8rem 1.4rem; border-radius: 3px; background: var(--highlight); color: #14213d; font-weight: 700; text-decoration: none; }
     .button:hover { filter: brightness(.94); }
     .layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 3.5rem; max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
@@ -95,8 +94,9 @@
     .references { padding-left: 1.25rem; color: var(--muted); }
     .references li { margin-bottom: .65rem; overflow-wrap: anywhere; }
     footer { margin-top: 3.75rem; padding: 2.5rem 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); background: var(--band); color: var(--band-text); text-align: center; }
-    footer p { margin: 0; }
-    footer strong { color: var(--highlight); }
+    .footer-logo { display: block; width: min(100%, 340px); height: auto; margin: 0 auto 1.5rem; }
+    footer p { margin: .15rem 0; }
+    footer .author { font-weight: 700; }
     @media (max-width: 820px) {
       .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
       .index { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; flex-direction: row; overflow-x: auto; margin: 0 -1.5rem; padding: .75rem 1.5rem; background: var(--paper); }
@@ -109,16 +109,14 @@
       .timeline { grid-template-columns: 1fr; gap: .25rem; }
       .hero h1 { font-size: clamp(2.25rem, 12vw, 3.3rem); }
     }
-    @media (prefers-reduced-motion: reduce) {
-      :root { scroll-behavior: auto; }
-    }
+    @media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="hero" id="inicio">
     <div class="hero-inner">
-      <div class="brand" aria-label="DATASUS"><span class="brand-mark" aria-hidden="true">D</span><span>DATASUS · SAÚDE PÚBLICA</span></div>
+      <img class="datasus-logo" src="https://datasus.saude.gov.br/images/datasus_logo.png" alt="DATASUS — Departamento de Informática do SUS" fetchpriority="high">
       <h1>Informação que <em>fortalece</em> o SUS</h1>
       <p>Entenda como o DATASUS reúne, organiza e disponibiliza os dados que ajudam a planejar a saúde pública no Brasil.</p>
       <a class="button" href="#o-que-e">Conheça o DATASUS</a>
@@ -172,6 +170,11 @@
       </section>
     </main>
   </div>
-  <footer><p><strong>DATASUS</strong> — informação que fortalece o SUS</p></footer>
+  <footer>
+    <img class="footer-logo" src="https://datasus.saude.gov.br/images/datasus_logo.png" alt="DATASUS — Departamento de Informática do SUS" loading="lazy">
+    <p class="author">Publicado por Mychele Silva Sousa</p>
+    <p>Aluna do segundo período de enfermagem</p>
+    <p>FACULDADE SANTA LUZIA</p>
+  </footer>
 </body>
 </html>
