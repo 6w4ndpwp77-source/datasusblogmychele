@@ -1,96 +1,177 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>DATASUS: informação que fortalece o SUS</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@500&display=swap">
-<style>
-:root{--paper:#F6F3EC;--ink:#14213D;--mut:#55607a;--ac:#0F8B8D;--hot:#D9482B;--line:#d8d1c0;--band:#14213D;--bandt:#F6F3EC;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0E1524;--ink:#EEF1F6;--mut:#a4afc4;--ac:#3CC6C8;--hot:#FF7A5C;--line:#2a3550;--band:#0A101C;color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#0E1524;--ink:#EEF1F6;--mut:#a4afc4;--ac:#3CC6C8;--hot:#FF7A5C;--line:#2a3550;--band:#0A101C;color-scheme:dark}
-*,*::before,*::after{box-sizing:inherit}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 'DM Sans',sans-serif}
-h1,h2{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-height:1.1;margin:0}
-a{color:var(--ac)}
-.hd{background:var(--band);color:var(--bandt);padding:46px 24px 54px}
-.hd>div{max-width:1040px;margin:0 auto}
-.hd img{height:78px;width:auto;max-width:100%;display:block;margin-bottom:38px}
-.hd h1{font-size:clamp(2.4rem,7vw,4.6rem);max-width:820px}
-.hd h1 i{color:#FFC857}
-.hd p{max-width:600px;color:#c9d2e3;font-size:1.1rem;margin:18px 0 28px}
-.go{display:inline-block;background:#FFC857;color:#14213D;font-weight:700;text-decoration:none;padding:14px 26px;border-radius:3px}
-.lay{max-width:1040px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:190px 1fr;gap:56px}
-.idx{position:sticky;top:0;align-self:start;padding-top:42px;display:flex;flex-direction:column;gap:10px;font:500 .82rem 'JetBrains Mono',monospace}
-.idx a{color:var(--mut);text-decoration:none;border-left:2px solid var(--line);padding-left:12px}
-.idx a:hover{color:var(--hot);border-color:var(--hot)}
-section{padding:54px 0 14px;border-bottom:1px solid var(--line)}
-section:last-child{border:0}
-.n{font:500 .85rem 'JetBrains Mono',monospace;color:var(--hot)}
-h2{font-size:clamp(1.9rem,4vw,2.7rem);margin:4px 0 18px}
-p{margin:0 0 1em}
-.big{font:400 4.6rem/1 'DM Serif Display',serif;color:var(--ac);display:block}
-.fact{border-left:4px solid var(--hot);padding-left:18px;margin:22px 0;color:var(--mut)}
-.t{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:16px 0;border-top:1px solid var(--line)}
-.t b{font:500 .95rem 'JetBrains Mono',monospace;color:var(--ac)}
-.t p{margin:0}
-.row{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
-.ic{width:56px;height:56px;border:1.5px solid var(--ac);border-radius:50%;display:grid;place-items:center}
-.ic svg{width:28px;height:28px;fill:none;stroke:var(--ac);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.row h3{margin:0;font:700 1.1rem 'DM Sans';letter-spacing:.04em}
-.full{color:var(--hot);font-size:.88rem;font-weight:500}
-.row p{margin:4px 0 0;color:var(--mut)}
-.fn{counter-reset:f;list-style:none;padding:0;margin:0}
-.fn li{counter-increment:f;display:grid;grid-template-columns:54px 1fr;padding:14px 0;border-top:1px solid var(--line)}
-.fn li::before{content:counter(f,decimal-leading-zero);font:500 1.2rem 'JetBrains Mono',monospace;color:var(--hot)}
-h3.s{margin:20px 0 2px;font:700 1.05rem 'DM Sans';color:var(--ac)}
-.refs{padding-left:20px;color:var(--mut)}.refs li{margin-bottom:10px;overflow-wrap:anywhere}
-footer{background:var(--band);color:var(--bandt);margin-top:60px;padding:40px 24px calc(40px + env(safe-area-inset-bottom,0px));text-align:center}
-footer img{height:46px;width:auto;margin:0 auto 16px;display:block}
-footer p{margin:0;line-height:1.7}footer strong{color:#FFC857}
-@media(max-width:820px){.lay{grid-template-columns:1fr;gap:0}.idx{position:sticky;top:env(safe-area-inset-top,0px);flex-direction:row;overflow-x:auto;padding:12px 0;background:var(--paper);z-index:5}.idx a{border-left:0;border-bottom:2px solid var(--line);padding:0 0 10px;margin-right:18px}.hd{padding-top:34px}.go{display:inline-flex}} 
-</style></head><body>
-<header class="hd" id="inicio"><div>
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAACkCAYAAADyvdbfAABLQElEQVR42u2dd5heVbX/P2taeg+EhFRKgNA7GBAQBAFRQL12bNfutVzbz+71XrvXehUVBUUFpYkU6R2E0CEQ0oBASCG9J1PX74+1zjMnL28557znnXlnZn+f" alt="DATASUS">
-<h1>Informação que <i>fortalece</i> o SUS</h1>
-<p>Entenda como o DATASUS reúne, organiza e disponibiliza os dados que ajudam a planejar a saúde pública no Brasil.</p>
-<a class="go" href="#o-que-e">Conheça o DATASUS</a></div></header>
-<div class="lay">
-<nav class="idx" aria-label="Seções"><a href="#o-que-e">O que é</a><a href="#historia">História</a><a href="#funcoes">Funções</a><a href="#sistemas">Sistemas</a><a href="#importancia">Importância</a><a href="#exemplos">Exemplos</a><a href="#referencias">Referências</a></nav>
-<main>
-<section id="o-que-e"><span class="n">01</span><h2>O que é o DATASUS</h2>
-<p>O DATASUS é o Departamento de Informação e Informática do Sistema Único de Saúde, ligado ao Ministério da Saúde. Cabe a ele apoiar o desenvolvimento, a manutenção e a operação dos sistemas de informação do SUS.</p>
-<p>Ao reunir dados sobre nascimentos, mortes, internações e estabelecimentos, o departamento dá base ao planejamento do SUS e permite que gestores, profissionais, pesquisadores e cidadãos acompanhem a saúde pública brasileira com mais precisão.</p>
-<div class="fact"><span class="big">1991</span>Ano de criação do DATASUS, pelo Decreto nº 100, de 16 de abril de 1991.</div></section>
-
-<section id="historia"><span class="n">02</span><h2>História</h2>
-<div class="t"><b>Antes de 1991</b><p>O processamento de dados e das contas de saúde era feito pela Dataprev, empresa de processamento de dados da Previdência Social.</p></div>
-<div class="t"><b>1991</b><p>O Decreto nº 100 criou a Fundação Nacional de Saúde (Funasa) e, junto com ela, o DATASUS, para prover os órgãos do SUS de sistemas de informação e suporte de informática.</p></div>
-<div class="t"><b>Anos 2000</b><p>Com a reestruturação do Ministério da Saúde (Decreto nº 4.194/2002), o DATASUS passou a integrar a administração direta do Ministério.</p></div>
-<div class="t"><b>2023 em diante</b><p>Com a criação da SEIDIGI, o departamento passa a atuar na agenda de saúde digital, incluindo a Rede Nacional de Dados em Saúde (RNDS).</p></div></section>
-
-<section id="funcoes"><span class="n">03</span><h2>Principais funções</h2>
-<ol class="fn"><li><span>Coletar e processar dados em saúde.</span></li><li><span>Disponibilizar informações para gestores, profissionais e cidadãos.</span></li><li><span>Apoiar o planejamento e a avaliação das políticas de saúde.</span></li><li><span>Dar suporte tecnológico para a gestão do SUS e para a pesquisa em saúde.</span></li></ol>
-<p style="margin-top:18px;color:var(--mut)">O decreto de criação também atribui ao departamento fomentar e avaliar as ações de informatização do SUS e coordenar a implantação do sistema nacional de informações em saúde.</p></section>
-
-<section id="sistemas"><span class="n">04</span><h2>Sistemas e ferramentas</h2><div class="row"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18"/><rect x="5" y="12" width="14" height="7" rx="1.5"/><path d="M8 12V8M16 12V8M12 12V6"/></svg></div><div><h3>CNES</h3><p>Cadastro Nacional de Estabelecimentos de Saúde.</p></div></div><div class="row"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10l4 4v14H7z"/><path d="M17 3v5h5M9 12h6M9 16h9"/></svg></div><div><h3>SINASC</h3><p>Sistema de Informações sobre Nascidos Vivos.</p></div></div><div class="row"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10z"/><path d="M12 11h.01"/></svg></div><div><h3>SIM</h3><p>Sistema de Informações sobre Mortalidade.</p></div></div><div class="row"><div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v12"/><path d="M9 10h6M9 14h6M9 18h4"/></svg></div><div><h3>SIH/SUS</h3><p>Sistema de Informações Hospitalares do SUS.</p></div></div></section>
-
-<section id="importancia"><span class="n">05</span><h2>Importância para o SUS</h2>
-<h3 class="s">Gestão</h3><p>Dados padronizados permitem acompanhar serviços, leitos, internações e a produção das unidades.</p>
-<h3 class="s">Planejamento</h3><p>Indicadores de nascimentos, mortes e doenças mostram onde ampliar serviços e quais políticas priorizar.</p>
-<h3 class="s">Transparência</h3><p>As bases são públicas, o que favorece o controle social e a pesquisa.</p>
-<h3 class="s">Tomada de decisões</h3><p>Decidir com base em evidências melhora o atendimento e o uso do dinheiro público.</p></section>
-
-<section id="exemplos"><span class="n">06</span><h2>Exemplos de uso dos dados</h2>
-<h3 class="s">Vigilância epidemiológica</h3><p>Com o SINAN, profissionais acompanham doenças de notificação compulsória e orientam ações de controle.</p>
-<h3 class="s">Saúde materno-infantil</h3><p>O SINASC mostra a cobertura de pré-natal e o peso ao nascer no município, e o SIM ajuda a analisar a mortalidade infantil.</p>
-<h3 class="s">Organização da rede</h3><p>CNES e SIH/SUS indicam onde há estabelecimentos, leitos e internações, para planejar a oferta de serviços.</p></section>
-
-<section id="referencias"><span class="n">07</span><h2>Referências</h2>
-<ol class="refs">
-<li>BRASIL. Ministério da Saúde. <em>DATASUS</em>. <a href="https://www.gov.br/saude/pt-br/composicao/seidigi/datasus">gov.br/saude/pt-br/composicao/seidigi/datasus</a>.</li>
-<li>BRASIL. Ministério da Saúde. Portal DATASUS: <a href="https://datasus.saude.gov.br">datasus.saude.gov.br</a>.</li>
-<li>BRASIL. Decreto nº 100, de 16 de abril de 1991. <em>Diário Oficial da União</em>, Brasília, 17 abr. 1991.</li>
-<li>BRASIL. Ministério da Saúde. <em>DATASUS: trajetória 1991-2002</em>. Brasília: Ministério da Saúde, 2002.</li></ol></section>
-</main></div>
-<footer><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAACkCAYAAADyvdbfAABLQElEQVR42u2dd5heVbX/P2taeg+EhFRKgNA7GBAQBAFRQL12bNfutVzbz+71XrvXehUVBUUFpYkU6R2E0CEQ0oBASCG9J1PX74+1zjMnL28557zn" alt="Ministério da Saúde"><p><strong>DATASUS</strong> — informação que fortalece o SUS</p></footer>
-</body></html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Conheça o DATASUS e entenda como os dados de saúde apoiam o planejamento, a transparência e o fortalecimento do SUS.">
+  <meta name="theme-color" content="#14213d">
+  <title>DATASUS: informação que fortalece o SUS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f3ec;
+      --ink: #14213d;
+      --muted: #55607a;
+      --accent: #0f7375;
+      --hot: #b7351c;
+      --line: #d8d1c0;
+      --band: #14213d;
+      --band-text: #f6f3ec;
+      --highlight: #ffc857;
+      --focus: #1463cc;
+      font-family: 'DM Sans', sans-serif;
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+      background: var(--paper);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme='light']) {
+        color-scheme: dark;
+        --paper: #0e1524;
+        --ink: #eef1f6;
+        --muted: #a4afc4;
+        --accent: #62d4d5;
+        --hot: #ff8a70;
+        --line: #2a3550;
+        --band: #0a101c;
+        --band-text: #eef1f6;
+        --focus: #8dbaff;
+      }
+    }
+    :root[data-theme='dark'] {
+      color-scheme: dark;
+      --paper: #0e1524;
+      --ink: #eef1f6;
+      --muted: #a4afc4;
+      --accent: #62d4d5;
+      --hot: #ff8a70;
+      --line: #2a3550;
+      --band: #0a101c;
+      --band-text: #eef1f6;
+      --focus: #8dbaff;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-size: 17px; line-height: 1.7; }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    h1, h2 { margin: 0; font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; line-height: 1.1; }
+    p { margin: 0 0 1em; }
+    .skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 20; padding: .6rem 1rem; background: var(--paper); color: var(--ink); }
+    .skip-link:focus { top: 1rem; }
+    .hero { padding: 2.8rem 1.5rem 3.4rem; background: var(--band); color: var(--band-text); }
+    .hero-inner { max-width: 1040px; margin: 0 auto; }
+    .brand { display: inline-flex; align-items: center; gap: .65rem; margin-bottom: 2rem; color: var(--band-text); font: 500 .9rem 'JetBrains Mono', monospace; letter-spacing: .04em; }
+    .brand-mark { display: grid; width: 2.6rem; height: 2.6rem; place-items: center; border: 2px solid var(--highlight); border-radius: 50%; color: var(--highlight); font-weight: 700; }
+    .hero h1 { max-width: 820px; font-size: clamp(2.4rem, 7vw, 4.6rem); }
+    .hero h1 em { color: var(--highlight); font-style: normal; }
+    .hero p { max-width: 600px; margin: 1.1rem 0 1.7rem; color: #d3d9e5; font-size: 1.1rem; }
+    .button { display: inline-block; padding: .8rem 1.4rem; border-radius: 3px; background: var(--highlight); color: #14213d; font-weight: 700; text-decoration: none; }
+    .button:hover { filter: brightness(.94); }
+    .layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 3.5rem; max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+    .index { position: sticky; top: 0; align-self: start; display: flex; flex-direction: column; gap: .65rem; padding-top: 2.6rem; font: 500 .82rem 'JetBrains Mono', monospace; }
+    .index a { border-left: 2px solid var(--line); padding-left: .75rem; color: var(--muted); text-decoration: none; }
+    .index a:hover { border-color: var(--hot); color: var(--hot); }
+    main { min-width: 0; }
+    section { padding: 3.4rem 0 .9rem; border-bottom: 1px solid var(--line); }
+    section:last-child { border: 0; }
+    .number { color: var(--hot); font: 500 .85rem 'JetBrains Mono', monospace; }
+    h2 { margin: .25rem 0 1.1rem; font-size: clamp(1.9rem, 4vw, 2.7rem); }
+    .big { display: block; color: var(--accent); font: 400 4.6rem/1 'DM Serif Display', Georgia, serif; }
+    .fact { margin: 1.4rem 0; border-left: 4px solid var(--hot); padding-left: 1.1rem; color: var(--muted); }
+    .timeline { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 1.1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+    .timeline b { color: var(--accent); font: 500 .95rem 'JetBrains Mono', monospace; }
+    .timeline p { margin: 0; }
+    .function-list { margin: 0; padding: 0; list-style: none; counter-reset: item; }
+    .function-list li { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: .4rem; padding: .9rem 0; border-top: 1px solid var(--line); counter-increment: item; }
+    .function-list li::before { content: counter(item, decimal-leading-zero); color: var(--hot); font: 500 1.2rem 'JetBrains Mono', monospace; }
+    .system { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 1.1rem; padding: 1.1rem 0; border-top: 1px solid var(--line); }
+    .icon { display: grid; width: 56px; height: 56px; place-items: center; border: 1.5px solid var(--accent); border-radius: 50%; color: var(--accent); font: 500 .8rem 'JetBrains Mono', monospace; }
+    .system h3 { margin: 0; font-size: 1.1rem; }
+    .system p { margin: .25rem 0 0; color: var(--muted); }
+    h3.subheading { margin: 1.25rem 0 .1rem; color: var(--accent); font-size: 1.05rem; }
+    .references { padding-left: 1.25rem; color: var(--muted); }
+    .references li { margin-bottom: .65rem; overflow-wrap: anywhere; }
+    footer { margin-top: 3.75rem; padding: 2.5rem 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); background: var(--band); color: var(--band-text); text-align: center; }
+    footer p { margin: 0; }
+    footer strong { color: var(--highlight); }
+    @media (max-width: 820px) {
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .index { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; flex-direction: row; overflow-x: auto; margin: 0 -1.5rem; padding: .75rem 1.5rem; background: var(--paper); }
+      .index a { flex: 0 0 auto; border: 0; border-bottom: 2px solid var(--line); padding: 0 0 .45rem; margin-right: .9rem; }
+      .index a:hover { border-color: var(--hot); }
+      .hero { padding-top: 2rem; }
+    }
+    @media (max-width: 480px) {
+      body { font-size: 16px; }
+      .timeline { grid-template-columns: 1fr; gap: .25rem; }
+      .hero h1 { font-size: clamp(2.25rem, 12vw, 3.3rem); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="brand" aria-label="DATASUS"><span class="brand-mark" aria-hidden="true">D</span><span>DATASUS · SAÚDE PÚBLICA</span></div>
+      <h1>Informação que <em>fortalece</em> o SUS</h1>
+      <p>Entenda como o DATASUS reúne, organiza e disponibiliza os dados que ajudam a planejar a saúde pública no Brasil.</p>
+      <a class="button" href="#o-que-e">Conheça o DATASUS</a>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="index" aria-label="Seções da página">
+      <a href="#o-que-e">O que é</a><a href="#historia">História</a><a href="#funcoes">Funções</a><a href="#sistemas">Sistemas</a><a href="#importancia">Importância</a><a href="#exemplos">Exemplos</a><a href="#referencias">Referências</a>
+    </nav>
+    <main id="conteudo">
+      <section id="o-que-e" aria-labelledby="titulo-o-que-e"><span class="number">01</span><h2 id="titulo-o-que-e">O que é o DATASUS</h2>
+        <p>O DATASUS é o Departamento de Informação e Informática do Sistema Único de Saúde, ligado ao Ministério da Saúde. Cabe a ele apoiar o desenvolvimento, a manutenção e a operação dos sistemas de informação do SUS.</p>
+        <p>Ao reunir dados sobre nascimentos, mortes, internações e estabelecimentos, o departamento dá base ao planejamento do SUS e permite que gestores, profissionais, pesquisadores e cidadãos acompanhem a saúde pública brasileira.</p>
+        <div class="fact"><span class="big">1991</span>Ano de criação do DATASUS, pelo Decreto nº 100, de 16 de abril de 1991.</div>
+      </section>
+      <section id="historia" aria-labelledby="titulo-historia"><span class="number">02</span><h2 id="titulo-historia">História</h2>
+        <div class="timeline"><b>Antes de 1991</b><p>O processamento de dados e das contas de saúde era feito pela Dataprev, empresa de processamento de dados da Previdência Social.</p></div>
+        <div class="timeline"><b>1991</b><p>O Decreto nº 100 criou a Fundação Nacional de Saúde (Funasa) e, junto com ela, o DATASUS, para prover os órgãos do SUS de sistemas de informação e suporte de informática.</p></div>
+        <div class="timeline"><b>Anos 2000</b><p>Com a reestruturação do Ministério da Saúde (Decreto nº 4.194/2002), o DATASUS passou a integrar a administração direta do Ministério.</p></div>
+        <div class="timeline"><b>2023 em diante</b><p>Com a criação da SEIDIGI, o departamento passou a atuar na agenda de saúde digital, incluindo a Rede Nacional de Dados em Saúde (RNDS).</p></div>
+      </section>
+      <section id="funcoes" aria-labelledby="titulo-funcoes"><span class="number">03</span><h2 id="titulo-funcoes">Principais funções</h2>
+        <ol class="function-list"><li><span>Coletar e processar dados em saúde.</span></li><li><span>Disponibilizar informações para gestores, profissionais e cidadãos.</span></li><li><span>Apoiar o planejamento e a avaliação das políticas de saúde.</span></li><li><span>Dar suporte tecnológico à gestão do SUS e à pesquisa em saúde.</span></li></ol>
+        <p style="margin-top: 1.1rem; color: var(--muted)">O decreto de criação também atribui ao departamento fomentar e avaliar as ações de informatização do SUS e coordenar a implantação do sistema nacional de informações em saúde.</p>
+      </section>
+      <section id="sistemas" aria-labelledby="titulo-sistemas"><span class="number">04</span><h2 id="titulo-sistemas">Sistemas e ferramentas</h2>
+        <div class="system"><div class="icon" aria-hidden="true">CNES</div><div><h3>CNES</h3><p>Cadastro Nacional de Estabelecimentos de Saúde.</p></div></div>
+        <div class="system"><div class="icon" aria-hidden="true">SINASC</div><div><h3>SINASC</h3><p>Sistema de Informações sobre Nascidos Vivos.</p></div></div>
+        <div class="system"><div class="icon" aria-hidden="true">SIM</div><div><h3>SIM</h3><p>Sistema de Informações sobre Mortalidade.</p></div></div>
+        <div class="system"><div class="icon" aria-hidden="true">SIH</div><div><h3>SIH/SUS</h3><p>Sistema de Informações Hospitalares do SUS.</p></div></div>
+        <div class="system"><div class="icon" aria-hidden="true">SINAN</div><div><h3>SINAN</h3><p>Sistema de Informação de Agravos de Notificação.</p></div></div>
+      </section>
+      <section id="importancia" aria-labelledby="titulo-importancia"><span class="number">05</span><h2 id="titulo-importancia">Importância para o SUS</h2>
+        <h3 class="subheading">Gestão</h3><p>Dados padronizados permitem acompanhar serviços, leitos, internações e a produção das unidades.</p>
+        <h3 class="subheading">Planejamento</h3><p>Indicadores de nascimentos, mortes e doenças ajudam a identificar onde ampliar serviços e quais políticas priorizar.</p>
+        <h3 class="subheading">Transparência</h3><p>O acesso às bases públicas favorece o controle social e a pesquisa.</p>
+        <h3 class="subheading">Tomada de decisões</h3><p>Decidir com base em evidências pode melhorar o atendimento e o uso dos recursos públicos.</p>
+      </section>
+      <section id="exemplos" aria-labelledby="titulo-exemplos"><span class="number">06</span><h2 id="titulo-exemplos">Exemplos de uso dos dados</h2>
+        <h3 class="subheading">Vigilância epidemiológica</h3><p>O SINAN reúne registros de agravos e doenças de notificação compulsória, apoiando o acompanhamento e as ações de controle.</p>
+        <h3 class="subheading">Saúde materno-infantil</h3><p>Dados do SINASC ajudam a analisar nascimentos e características da gestação; o SIM permite estudar a mortalidade infantil.</p>
+        <h3 class="subheading">Organização da rede</h3><p>CNES e SIH/SUS ajudam a identificar estabelecimentos, leitos e internações para apoiar o planejamento da oferta de serviços.</p>
+      </section>
+      <section id="referencias" aria-labelledby="titulo-referencias"><span class="number">07</span><h2 id="titulo-referencias">Referências</h2>
+        <ol class="references">
+          <li>BRASIL. Ministério da Saúde. <em>DATASUS</em>. <a href="https://www.gov.br/saude/pt-br/composicao/seidigi/datasus">Página do DATASUS no gov.br</a>.</li>
+          <li>BRASIL. Ministério da Saúde. <a href="https://datasus.saude.gov.br">Portal DATASUS</a>.</li>
+          <li>BRASIL. Decreto nº 100, de 16 de abril de 1991. <em>Diário Oficial da União</em>, Brasília, 17 abr. 1991.</li>
+          <li>BRASIL. Ministério da Saúde. <em>DATASUS: trajetória 1991–2002</em>. Brasília: Ministério da Saúde, 2002.</li>
+        </ol>
+      </section>
+    </main>
+  </div>
+  <footer><p><strong>DATASUS</strong> — informação que fortalece o SUS</p></footer>
+</body>
+</html>
